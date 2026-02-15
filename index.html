@@ -1,77 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lin Jingwen | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lin Jingwen - Aspiring Frontend Web Developer. Portfolio projects: Bondify web app, Photography Club website." />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f8f9fa;
-      color: #111;
-      line-height: 1.6;
+    :root{
+      --bg: #0b0c10;
+      --card: rgba(255,255,255,0.06);
+      --text: #e8e8ea;
+      --muted: rgba(232,232,234,0.72);
+      --line: rgba(255,255,255,0.12);
+      --accent: #7c5cff;
+      --accent2: #22c55e;
+      --shadow: 0 20px 60px rgba(0,0,0,0.45);
+      --radius: 18px;
     }
-    header {
-      padding: 80px 20px;
-      text-align: center;
-      background: white;
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(124,92,255,0.18), transparent 60%),
+                  radial-gradient(900px 500px at 80% 20%, rgba(34,197,94,0.10), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      line-height:1.6;
     }
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1050px; margin:0 auto; padding:28px 18px 80px}
+
+    /* Top nav */
+    .nav{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 14px; border:1px solid var(--line);
+      border-radius: 999px; background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(8px);
+      position: sticky; top: 14px; z-index: 10;
     }
-    h2 {
-      margin-top: 60px;
-      font-size: 28px;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 10px;
+    .brand{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:0.3px}
+    .dot{width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow:0 0 20px rgba(124,92,255,0.55)}
+    .links{display:flex; gap:14px; align-items:center; font-size:14px; color: var(--muted)}
+    .links a{padding:8px 10px; border-radius: 999px}
+    .links a:hover{background: rgba(255,255,255,0.06); color: var(--text)}
+
+    /* Hero */
+    .hero{
+      margin-top:28px;
+      padding:44px 22px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
     }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
+    .hero h1{margin:0; font-size:42px; letter-spacing:-0.8px}
+    .subtitle{margin-top:10px; color: var(--muted); font-size:16px}
+    .pillRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      padding:8px 12px; border-radius:999px;
+      font-size:13px; color: var(--muted);
     }
-    .project {
-      margin-bottom: 40px;
+    .ctaRow{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px; padding:11px 14px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      font-weight:600; font-size:14px;
     }
-    footer {
-      text-align: center;
-      padding: 40px;
-      font-size: 14px;
-      color: #666;
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,92,255,0.95), rgba(124,92,255,0.55));
+      border-color: rgba(124,92,255,0.6);
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0px)}
+
+    /* Sections */
+    section{margin-top:34px}
+    .sectionHead{
+      display:flex; align-items:end; justify-content:space-between; gap:16px;
+      margin-bottom:12px;
+    }
+    .sectionHead h2{margin:0; font-size:22px}
+    .sectionHead p{margin:0; color:var(--muted); font-size:14px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+
+    .card{
+      grid-column: span 12;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.04);
+      padding:18px;
+    }
+
+    @media (min-width: 860px){
+      .card.half{grid-column: span 6;}
+      .card.third{grid-column: span 4;}
+    }
+
+    .card h3{margin:0 0 6px; font-size:18px}
+    .meta{color: var(--muted); font-size:13px; margin:0 0 12px}
+    .tagRow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .tag{
+      font-size:12px; color: var(--muted);
+      border:1px solid var(--line);
+      padding:6px 10px; border-radius:999px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .split{
+      display:grid; gap:10px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 860px){
+      .split{grid-template-columns: 1fr 1fr;}
+    }
+
+    .list{
+      margin:0; padding-left:18px; color: var(--muted);
+      font-size:14px;
+    }
+    .list li{margin:6px 0}
+
+    /* Project cover (optional image placeholder) */
+    .cover{
+      border:1px dashed rgba(255,255,255,0.18);
+      border-radius: 14px;
+      height: 170px;
+      display:flex; align-items:center; justify-content:center;
+      color: rgba(232,232,234,0.55);
+      font-size: 13px;
+      background: rgba(0,0,0,0.16);
+    }
+
+    footer{
+      margin-top:44px;
+      color: rgba(232,232,234,0.55);
+      font-size: 13px;
+      text-align:center;
     }
   </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand"><span class="dot"></span> Lin Jingwen</div>
+      <div class="links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
 
-<header>
-  <h1>Lin Jingwen</h1>
-  <p>Aspiring Frontend Web Developer</p>
-  <p>I build structured web applications that combine backend logic with intuitive user experience design.</p>
-</header>
+    <header class="hero">
+      <h1>Lin Jingwen</h1>
+      <div class="subtitle">
+        Aspiring Frontend Web Developer (Business & Financial Technology) — I build web features with clean structure and user-focused UX.
+      </div>
 
-<div class="container">
+      <div class="pillRow">
+        <span class="pill">HTML • CSS • JavaScript</span>
+        <span class="pill">Python • Flask • SQLite</span>
+        <span class="pill">UX Principles • Responsive UI</span>
+        <span class="pill">Git • VS Code</span>
+      </div>
 
-  <h2>Projects</h2>
+      <div class="ctaRow">
+        <a class="btn primary" href="#projects">View Projects</a>
+        <!-- Replace # with your LinkedIn later if you want -->
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </header>
 
-  <div class="project">
-    <h3>Bondify Web Application</h3>
-    <p>A full-stack web platform featuring voucher management, authentication, and QR-based redemption tracking.</p>
-    <p><strong>Tech Stack:</strong> Python, Flask, SQLite, HTML, CSS</p>
+    <section id="projects">
+      <div class="sectionHead">
+        <h2>Projects</h2>
+        <p>What I built • My role • Process • Outcome</p>
+      </div>
+
+      <div class="grid">
+        <!-- Bondify -->
+        <div class="card half">
+          <h3>Bondify Web Application</h3>
+          <p class="meta">Full-stack Web App • Voucher management + redemption flow</p>
+
+          <div class="cover">Add screenshots later (e.g., login / vouchers / redemption)</div>
+
+          <div class="tagRow">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">SQLite</span>
+            <span class="tag">CRUD</span>
+            <span class="tag">Authentication</span>
+          </div>
+
+          <div class="split" style="margin-top:14px;">
+            <div>
+              <strong>My role</strong>
+              <ul class="list">
+                <li>Implemented voucher & partner CRUD routes.</li>
+                <li>Designed/updated SQLite tables for voucher tracking.</li>
+                <li>Integrated QR-based redemption logic and verification checks.</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Outcome</strong>
+              <ul class="list">
+                <li>Functional end-to-end voucher flow from creation → redemption.</li>
+                <li>Improved usability by aligning UI flow with backend logic.</li>
+                <li>Strengthened understanding of route structure + data integrity.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photography Club -->
+        <div class="card half">
+          <h3>Photography Club Website</h3>
+          <p class="meta">Responsive Frontend Website • Clear navigation + visual hierarchy</p>
+
+          <div class="cover">Add screenshots later (home / gallery / join section)</div>
+
+          <div class="tagRow">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Responsive Design</span>
+          </div>
+
+          <div class="split" style="margin-top:14px;">
+            <div>
+              <strong>My role</strong>
+              <ul class="list">
+                <li>Structured layout using semantic HTML for readability.</li>
+                <li>Built responsive sections (About, Gallery, Events, Join Us).</li>
+                <li>Applied consistent typography and spacing for clarity.</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Outcome</strong>
+              <ul class="list">
+                <li>Clean club page that communicates activities and recruitment info.</li>
+                <li>Improved navigation clarity and content scannability.</li>
+                <li>Practised UI consistency and mobile-friendly layouts.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="sectionHead">
+        <h2>Skills</h2>
+        <p>Focused on frontend delivery + UX clarity</p>
+      </div>
+
+      <div class="grid">
+        <div class="card third">
+          <h3>Frontend</h3>
+          <ul class="list">
+            <li>HTML, CSS, JavaScript</li>
+            <li>Responsive layouts</li>
+            <li>UI consistency & hierarchy</li>
+          </ul>
+        </div>
+
+        <div class="card third">
+          <h3>Backend</h3>
+          <ul class="list">
+            <li>Python, Flask</li>
+            <li>CRUD patterns</li>
+            <li>Authentication fundamentals</li>
+          </ul>
+        </div>
+
+        <div class="card third">
+          <h3>Tools</h3>
+          <ul class="list">
+            <li>Git / GitHub</li>
+            <li>VS Code</li>
+            <li>SQLite, SQL basics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="sectionHead">
+        <h2>Contact</h2>
+        <p>Use your school email if preferred</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <p style="margin:0; color: var(--muted);">
+            Email: <strong style="color: var(--text);">lnjingwen@gmail.com</strong>
+            &nbsp;•&nbsp;
+            GitHub: <strong style="color: var(--text);">wenwwn</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> Lin Jingwen • Hosted on GitHub Pages
+    </footer>
   </div>
 
-  <div class="project">
-    <h3>Photography Club Website</h3>
-    <p>A responsive frontend website designed to improve visibility and engagement for a student organisation.</p>
-    <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript</p>
-  </div>
-
-</div>
-
-<footer>
-  © 2026 Lin Jingwen
-</footer>
-
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
