@@ -8,13 +8,15 @@
 
   <style>
     :root{
-      --bg: #0b0c10;
+      --bg: #070b16;
       --card: rgba(255,255,255,0.06);
-      --text: #e8e8ea;
-      --muted: rgba(232,232,234,0.72);
-      --line: rgba(255,255,255,0.12);
-      --accent: #7c5cff;
-      --accent2: #22c55e;
+      --text: #eaf2ff;
+      --muted: rgba(234,242,255,0.72);
+      --line: rgba(234,242,255,0.14);
+
+      /* Blue theme */
+      --accent: #3b82f6;     /* blue */
+      --accent2: #22d3ee;    /* cyan */
       --shadow: 0 20px 60px rgba(0,0,0,0.45);
       --radius: 18px;
     }
@@ -23,9 +25,11 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 20% 10%, rgba(124,92,255,0.18), transparent 60%),
-                  radial-gradient(900px 500px at 80% 20%, rgba(34,197,94,0.10), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(59,130,246,0.22), transparent 60%),
+        radial-gradient(900px 500px at 80% 20%, rgba(34,211,238,0.14), transparent 55%),
+        radial-gradient(900px 500px at 60% 90%, rgba(59,130,246,0.12), transparent 55%),
+        var(--bg);
       color: var(--text);
       line-height:1.6;
     }
@@ -42,7 +46,7 @@
       position: sticky; top: 14px; z-index: 10;
     }
     .brand{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:0.3px}
-    .dot{width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow:0 0 20px rgba(124,92,255,0.55)}
+    .dot{width:10px; height:10px; border-radius:50%; background: var(--accent); box-shadow:0 0 22px rgba(59,130,246,0.65)}
     .links{display:flex; gap:14px; align-items:center; font-size:14px; color: var(--muted)}
     .links a{padding:8px 10px; border-radius: 999px}
     .links a:hover{background: rgba(255,255,255,0.06); color: var(--text)}
@@ -53,7 +57,7 @@
       padding:44px 22px;
       border:1px solid var(--line);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
       box-shadow: var(--shadow);
     }
     .hero h1{margin:0; font-size:42px; letter-spacing:-0.8px}
@@ -73,10 +77,12 @@
       border:1px solid var(--line);
       background: rgba(255,255,255,0.04);
       font-weight:600; font-size:14px;
+      transition: transform .15s ease;
     }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(124,92,255,0.95), rgba(124,92,255,0.55));
-      border-color: rgba(124,92,255,0.6);
+      background: linear-gradient(135deg, rgba(59,130,246,0.98), rgba(34,211,238,0.62));
+      border-color: rgba(59,130,246,0.65);
+      box-shadow: 0 10px 28px rgba(59,130,246,0.18);
     }
     .btn:hover{transform: translateY(-1px)}
     .btn:active{transform: translateY(0px)}
@@ -133,20 +139,50 @@
     }
     .list li{margin:6px 0}
 
-    /* Project cover (optional image placeholder) */
-    .cover{
-      border:1px dashed rgba(255,255,255,0.18);
+    /* Screenshot gallery */
+    .shotWrap{
+      border:1px solid var(--line);
       border-radius: 14px;
-      height: 170px;
+      overflow:hidden;
+      background: rgba(0,0,0,0.14);
+    }
+    .shotTabs{
+      display:flex; gap:8px; flex-wrap:wrap;
+      padding:10px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+    .shotTabs button{
+      appearance:none; border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-weight:600; font-size:12px;
+      padding:7px 10px; border-radius:999px;
+      cursor:pointer;
+    }
+    .shotTabs button.active{
+      color: var(--text);
+      border-color: rgba(59,130,246,0.65);
+      background: rgba(59,130,246,0.18);
+      box-shadow: 0 10px 25px rgba(59,130,246,0.14);
+    }
+    .shotStage{
+      position:relative;
+      aspect-ratio: 16 / 9;
+      width:100%;
+      background: rgba(0,0,0,0.18);
       display:flex; align-items:center; justify-content:center;
-      color: rgba(232,232,234,0.55);
-      font-size: 13px;
-      background: rgba(0,0,0,0.16);
+    }
+    .shotStage img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
     }
 
     footer{
       margin-top:44px;
-      color: rgba(232,232,234,0.55);
+      color: rgba(234,242,255,0.55);
       font-size: 13px;
       text-align:center;
     }
@@ -196,7 +232,17 @@
           <h3>Bondify Web Application</h3>
           <p class="meta">Full-stack Web App • Voucher management + redemption flow</p>
 
-          <div class="cover">Add screenshots later (e.g., login / vouchers / redemption)</div>
+          <!-- UPDATED: screenshot gallery -->
+          <div class="shotWrap" data-gallery="bondify">
+            <div class="shotTabs">
+              <button type="button" class="active" data-img="bondify-login.png">Login</button>
+              <button type="button" data-img="bondify-vouchers.png">Vouchers</button>
+              <button type="button" data-img="bondify-redemption.png">Redemption</button>
+            </div>
+            <div class="shotStage">
+              <img src="bondify-login.png" alt="Bondify login screen screenshot" loading="lazy">
+            </div>
+          </div>
 
           <div class="tagRow">
             <span class="tag">Python</span>
@@ -226,35 +272,44 @@
           </div>
         </div>
 
-        <!-- Photography Club -->
+        <!-- Photography Club (you uploaded UX screenshots, so we'll display UX project visuals here) -->
         <div class="card half">
-          <h3>Photography Club Website</h3>
-          <p class="meta">Responsive Frontend Website • Clear navigation + visual hierarchy</p>
+          <h3>UX Design Project</h3>
+          <p class="meta">UX Design • Wireframes / UI screens • Clear navigation + visual hierarchy</p>
 
-          <div class="cover">Add screenshots later (home / gallery / join section)</div>
+          <!-- UPDATED: screenshot gallery -->
+          <div class="shotWrap" data-gallery="ux">
+            <div class="shotTabs">
+              <button type="button" class="active" data-img="ux-home.png">Home</button>
+              <button type="button" data-img="ux-gallery.png">Gallery</button>
+            </div>
+            <div class="shotStage">
+              <img src="ux-home.png" alt="UX project home screen screenshot" loading="lazy">
+            </div>
+          </div>
 
           <div class="tagRow">
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Responsive Design</span>
+            <span class="tag">UX</span>
+            <span class="tag">Information Architecture</span>
+            <span class="tag">UI Hierarchy</span>
+            <span class="tag">Prototyping</span>
           </div>
 
           <div class="split" style="margin-top:14px;">
             <div>
               <strong>My role</strong>
               <ul class="list">
-                <li>Structured layout using semantic HTML for readability.</li>
-                <li>Built responsive sections (About, Gallery, Events, Join Us).</li>
-                <li>Applied consistent typography and spacing for clarity.</li>
+                <li>Structured layout using semantic sections for readability.</li>
+                <li>Designed key screens (Home, Gallery) with clear hierarchy.</li>
+                <li>Improved scannability using consistent spacing and typography.</li>
               </ul>
             </div>
             <div>
               <strong>Outcome</strong>
               <ul class="list">
-                <li>Clean club page that communicates activities and recruitment info.</li>
-                <li>Improved navigation clarity and content scannability.</li>
-                <li>Practised UI consistency and mobile-friendly layouts.</li>
+                <li>Clear user flow and navigation structure across key pages.</li>
+                <li>Improved content clarity with stronger layout decisions.</li>
+                <li>Practised UX reasoning and design consistency.</li>
               </ul>
             </div>
           </div>
@@ -321,7 +376,22 @@
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Simple screenshot tab switcher
+    document.querySelectorAll(".shotWrap").forEach((wrap) => {
+      const stageImg = wrap.querySelector(".shotStage img");
+      const buttons = wrap.querySelectorAll(".shotTabs button");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          buttons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          const src = btn.getAttribute("data-img");
+          stageImg.src = src;
+        });
+      });
+    });
   </script>
 </body>
 </html>
+
 
